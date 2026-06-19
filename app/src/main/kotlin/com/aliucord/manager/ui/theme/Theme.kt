@@ -20,19 +20,22 @@ import dev.raincord.manager.R
 fun ManagerTheme(
     theme: Theme = Theme.System,
     dynamicColor: Boolean = true,
+    pitchBlack: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val dynamicColor = dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val darkTheme = when (theme) {
-        Theme.System -> isSystemInDarkTheme()
-        Theme.Dark -> true
-        Theme.Light -> false
-    }
-    val colorScheme = when {
+
+    val darkTheme = theme.isDark()
+    val usePitchBlack = darkTheme && pitchBlack
+    val baseColorScheme = when {
         dynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
         dynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
         darkTheme -> darkColorScheme()
         else -> lightColorScheme()
+    }
+    val colorScheme = when(usePitchBlack) {
+        true -> baseColorScheme.toPitchBlack()
+        false -> baseColorScheme
     }
     val customColors = when (darkTheme) {
         true -> DarkCustomColors
@@ -76,9 +79,25 @@ enum class Theme {
     }
 
     @Composable
+    fun isDark() = when (this) {
+        System -> isSystemInDarkTheme()
+        Dark -> true
+        Light -> false
+    }
+
+    @Composable
     fun toPainter() = when (this) {
         System -> painterResource(R.drawable.ic_sync)
         Light -> painterResource(R.drawable.ic_light)
         Dark -> painterResource(R.drawable.ic_night)
     }
+}
+private fun ColorScheme.toPitchBlack(): ColorScheme {
+    return this.copy(
+        background = Color.Black,
+        surface = Color.Black,
+        surfaceVariant = Color.Black,
+        onBackground = Color.White,
+        onSurface = Color.White
+    )
 }

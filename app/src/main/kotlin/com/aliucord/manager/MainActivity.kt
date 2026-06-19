@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
             ManagerTheme(
                 theme = preferences.theme,
                 dynamicColor = preferences.dynamicColor,
+                pitchBlack = preferences.pitchBlack
             ) {
                 if (BuildConfig.RELEASE) {
                     UpdaterDialog()
