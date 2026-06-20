@@ -270,5 +270,7 @@
   <string name="fun_fact_10">Also try out Aliucord!</string>
   <string name="fun_fact_11">Raincord is the fastest mobile mod currently</string>
   <string name="fun_fact_12" translatable="false">:3</string>
+  <string name="setting_pitch_black">Pitch Black</string>
+  <string name="setting_pitch_black_desc">Enables Pitch Black Backgrounds</string>
 
 </resources>

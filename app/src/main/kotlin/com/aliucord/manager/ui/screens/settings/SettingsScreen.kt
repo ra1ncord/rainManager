@@ -73,6 +73,15 @@ class SettingsScreen : Screen, Parcelable {
                         Text(preferences.theme.toDisplayName())
                     }
                 }
+                if (preferences.theme.isDark()) {
+                    SettingsSwitch(
+                        label = stringResource(R.string.setting_pitch_black),
+                        secondaryLabel = stringResource(R.string.setting_pitch_black_desc),
+                        pref = preferences.pitchBlack,
+                        icon = { Icon(painterResource(R.drawable.ic_contrast), null) },
+                        onPrefChange = { preferences.pitchBlack = it },
+                    )
+                }
 
                 // Material You theming on Android 12+
                 if (Build.VERSION.SDK_INT >= 31) {
@@ -84,6 +93,7 @@ class SettingsScreen : Screen, Parcelable {
                         onPrefChange = { preferences.dynamicColor = it },
                     )
                 }
+
 
                 SettingsHeader(stringResource(R.string.settings_header_advanced))
 
