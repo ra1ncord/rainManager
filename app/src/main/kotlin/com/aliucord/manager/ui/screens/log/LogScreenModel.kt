@@ -37,7 +37,7 @@ class LogScreenModel(
         val formattedDate = data.getFormattedInstallDate()
         val content = data.getLogFileContents()
 
-        application.saveFile("Aliucord Install $formattedDate.log", content)
+        application.saveFile("Rain Install $formattedDate.log", content)
     }
 
     /**
@@ -46,7 +46,7 @@ class LogScreenModel(
     fun shareLog() {
         val data = data ?: return
         val formattedDate = data.getFormattedInstallDate()
-        val formattedName = "Aliucord Install $formattedDate.log"
+        val formattedName = "Rain Install $formattedDate.log"
         val content = data.getLogFileContents()
 
         val file = application.cacheDir.resolve(formattedName)
